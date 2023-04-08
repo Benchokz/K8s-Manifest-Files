@@ -1,0 +1,19 @@
+apiVersion: apps/v1  # our API version
+kind: Deployment # # The kind we are creating
+metadata: # Specify all Metadata like name, labels
+ name: deployment
+ labels:
+   app: deploymentlabel
+spec:
+  replicas: 3 # Here is where we tell k8s how many replicas we want
+  selector:   # This is our label selector field. 
+    matchLabels: 
+      app: frontend   # we are using the Equality based operators
+  template:
+    metadata:
+      labels:
+        app: frontend   
+    spec:
+      containers:  
+        - name: nginx
+          image: nginx:1.19.6

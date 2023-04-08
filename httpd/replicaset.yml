@@ -1,0 +1,19 @@
+apiVersion: apps/v1  # our API version
+kind: ReplicaSet # # The kind we are creating
+metadata: # Specify all Metadata like name, labels
+ name: frontend
+ labels:
+   app: myReplica
+spec:
+  replicas: 3 # Here is where we tell k8s how many replicas we want
+  selector:   # This is our label selector field. 
+    matchLabels: 
+      app: frontend   # we are using the Equality based operators
+  template:
+    metadata:
+      labels:
+        app: frontend   
+    spec:
+      containers:  
+        - name: php-redis
+          image: gcr.io/google_samples/gb-frontend:v3
